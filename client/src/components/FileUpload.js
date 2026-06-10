@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { apiUrl } from '../api';
 
 export default function FileUpload({ onTextExtracted, label, placeholder }) {
   const inputRef = useRef();
@@ -20,7 +21,7 @@ export default function FileUpload({ onTextExtracted, label, placeholder }) {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const res = await fetch('/parse', { method: 'POST', body: formData });
+      const res = await fetch(apiUrl('/parse'), { method: 'POST', body: formData });
       if (!res.ok) throw new Error('Failed to parse file');
       const data = await res.json();
       onTextExtracted(data.text);

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiUrl } from '../api';
 
 function DocumentPreview({ title, content, filename }) {
   const [downloading, setDownloading] = useState(false);
@@ -7,7 +8,7 @@ function DocumentPreview({ title, content, filename }) {
   async function download() {
     setDownloading(true);
     try {
-      const res = await fetch('/export', {
+      const res = await fetch(apiUrl('/export'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content, filename }),

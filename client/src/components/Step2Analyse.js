@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { apiUrl } from '../api';
 
 function ScoreRing({ score }) {
   const radius = 45;
@@ -36,7 +37,7 @@ export default function Step2Analyse({ cvText, jdText, analysis, setAnalysis, on
     if (analysis || hasFetched.current) return;
     hasFetched.current = true;
     setLoading(true);
-    fetch('/analyse', {
+    fetch(apiUrl('/analyse'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cvText, jdText }),

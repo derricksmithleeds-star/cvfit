@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiUrl } from '../api';
 
 export default function Step3Questions({ gaps, gapAnswers, setGapAnswers, cvText, jdText, setResults, onNext, onBack }) {
   const [answers, setAnswers] = useState(() => {
@@ -30,7 +31,7 @@ export default function Step3Questions({ gaps, gapAnswers, setGapAnswers, cvText
     setGapAnswers(gapAnswersList);
 
     try {
-      const res = await fetch('/tailor', {
+      const res = await fetch(apiUrl('/tailor'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cvText, jdText, gapAnswers: gapAnswersList }),
